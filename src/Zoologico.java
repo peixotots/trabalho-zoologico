@@ -32,10 +32,10 @@ public class Zoologico {
         do {
             System.out.println("\n######## ZOO ########");
             System.out.println("1. Cadastrar Animal 🐾");
-            System.out.println("2. Cadastrar Funcionário 👷");
+            System.out.println("2. Cadastrar Funcionário 👨");
             System.out.println("3. Listar Animais por Setores 📋");
             System.out.println("4. Listar Comportamentos dos Animais 🦁");
-            System.out.println("5. Listar Funcionários por Função 🧑‍🔬");
+            System.out.println("5. Listar Funcionários por Função 👩‍🔬");
             System.out.println("6. Listar Atividades dos Funcionários 🛠️");
             System.out.println("7. Encerrar Programa ❌");
             System.out.print("Escolha uma opção: ");
@@ -70,20 +70,15 @@ public class Zoologico {
         int necessidadeOpcao = scanner.nextInt();
         scanner.nextLine();
 
-        String necessidadeAlimentar;
+        String necessidadeAlimentar = "";
         switch (necessidadeOpcao) {
-            case 1:
-                necessidadeAlimentar = "Carnívoro";
-                break;
-            case 2:
-                necessidadeAlimentar = "Herbívoro";
-                break;
-            case 3:
-                necessidadeAlimentar = "Onívoro";
-                break;
-            default:
+            case 1 -> necessidadeAlimentar = "Carnívoro";
+            case 2 -> necessidadeAlimentar = "Herbívoro";
+            case 3 -> necessidadeAlimentar = "Onívoro";
+            default -> {
                 System.out.println("Opção inválida. Animal não cadastrado.");
                 return;
+            }
         }
 
         System.out.println("\nSelecione a classe biológica do animal:");
@@ -94,25 +89,15 @@ public class Zoologico {
 
         Animal animal;
         switch (classeOpcao) {
-            case 1:
-                animal = new Mamifero(idade, nome, peso, necessidadeAlimentar);
-                break;
-            case 2:
-                animal = new Ave(idade, nome, peso, necessidadeAlimentar);
-                break;
-            case 3:
-                animal = new Reptil(idade, nome, peso, necessidadeAlimentar);
-                break;
-            case 4:
-                animal = new Anfibio(idade, nome, peso, necessidadeAlimentar);
-                break;
-            default:
+            case 1 -> animal = new Mamifero(idade, nome, peso, necessidadeAlimentar);
+            case 2 -> animal = new Ave(idade, nome, peso, necessidadeAlimentar);
+            case 3 -> animal = new Reptil(idade, nome, peso, necessidadeAlimentar);
+            case 4 -> animal = new Anfibio(idade, nome, peso, necessidadeAlimentar);
+            default -> {
                 System.out.println("Opção inválida. Classe biológica não encontrada. Animal não cadastrado.");
                 return;
+            }
         }
-
-//        System.out.println("Selecione o setor que o animal será alocado:");
-//        System.out.println("1. Setor de Animais Aquáticos | 2. Setor de Aves | 3. Setor de Felinos | 4. Setor de Répteis");
 
         animais.add(animal);
         System.out.println("Animal cadastrado com sucesso!");
@@ -132,18 +117,13 @@ public class Zoologico {
 
         Funcionario funcionario;
         switch (funcaoOpcao) {
-            case 1:
-                funcionario = new Veterinario(nome, identificacao);
-                break;
-            case 2:
-                funcionario = new Biologo(nome, identificacao);
-                break;
-            case 3:
-                funcionario = new CuidadorAnimais(nome, identificacao);
-                break;
-            default:
+            case 1 -> funcionario = new Veterinario(nome, identificacao);
+            case 2 -> funcionario = new Biologo(nome, identificacao);
+            case 3 -> funcionario = new CuidadorAnimais(nome, identificacao);
+            default -> {
                 System.out.println("Opção inválida. Funcionário não cadastrado.");
                 return;
+            }
         }
 
         funcionarios.add(funcionario);
@@ -163,7 +143,7 @@ public class Zoologico {
 
     public void listarComportamentosDosAnimais() {
         if (animais.isEmpty()) {
-            System.out.println("Nenhum animal cadastrado. Por favor, cadastre um animal para listar os comportamentos.\n");
+            System.out.println("\nNenhum animal cadastrado. Por favor, cadastre um animal para listar os comportamentos.");
             return;
         }
 
@@ -171,9 +151,9 @@ public class Zoologico {
 
         do {
             System.out.println("\n###### COMPORTAMENTOS DOS ANIMAIS ######");
-            System.out.println("1. Emitir som");
-            System.out.println("2. Comer");
-            System.out.println("3. Brincar");
+            System.out.println("1. Alimentar por necessidade alimentar");
+            System.out.println("2. Brincar");
+            System.out.println("3. Emitir som");
             System.out.println("4. Descansar");
             System.out.println("5. Voltar ao menu principal");
             System.out.print("Escolha uma opção: ");
@@ -181,9 +161,9 @@ public class Zoologico {
             scanner.nextLine();
 
             switch (opcao) {
-                case 1 -> emitirSomAnimais();
-                case 2 -> comerAnimais();
-                case 3 -> brincarAnimais();
+                case 1 -> alimentarAnimaisPorNecessidadeAlimentar();
+                case 2 -> brincarAnimais();
+                case 3 -> emitirSomAnimais();
                 case 4 -> descansarAnimais();
                 case 5 -> System.out.println("Retornando ao menu principal...");
                 default -> System.err.println("Digite uma opção válida.");
@@ -191,21 +171,50 @@ public class Zoologico {
         } while (opcao != 5);
     }
 
-    private void emitirSomAnimais() {
-        for (Animal animal : animais) {
-            animal.emitirSom();
-        }
-    }
+    public void alimentarAnimaisPorNecessidadeAlimentar() {
+        if (animais.isEmpty()) {
+            System.out.println("Nenhum animal cadastrado.");
+        } else {
+            System.out.println("\nSelecione a necessidade alimentar:");
+            System.out.println("1. Carnívoro | 2. Herbívoro | 3. Onívoro");
+            System.out.print("Escolha uma opção: ");
+            int necessidadeOpcao = scanner.nextInt();
+            scanner.nextLine();
 
-    private void comerAnimais() {
-        for (Animal animal : animais) {
-            animal.comer();
+            String necessidadeAlimentar = "";
+            switch (necessidadeOpcao) {
+                case 1 -> necessidadeAlimentar = "Carnívoro";
+                case 2 -> necessidadeAlimentar = "Herbívoro";
+                case 3 -> necessidadeAlimentar = "Onívoro";
+                default -> {
+                    System.err.println("Digite uma opção válida.\n");
+                    return;
+                }
+            }
+
+            boolean encontrouAnimal = false;
+            for (Animal animal : animais) {
+                if (animal.getNecessidadeAlimentar().equalsIgnoreCase(necessidadeAlimentar)) {
+                    animal.comer();
+                    encontrouAnimal = true;
+                }
+            }
+
+            if (!encontrouAnimal) {
+                System.out.println("\nNenhum animal com a necessidade alimentar selecionada.");
+            }
         }
     }
 
     private void brincarAnimais() {
         for (Animal animal : animais) {
             animal.brincar();
+        }
+    }
+
+    private void emitirSomAnimais() {
+        for (Animal animal : animais) {
+            animal.emitirSom();
         }
     }
 
@@ -263,7 +272,7 @@ public class Zoologico {
 
     public void listarAtividadesFuncionarios() {
         if (funcionarios.isEmpty()) {
-            System.out.println("\nNenhum funcionário cadastrado. Por favor, cadastre um funcionário para listar as atividades.\n");
+            System.out.println("\nNenhum funcionário cadastrado. Por favor, cadastre um funcionário para listar as atividades.");
             return;
         }
 
@@ -339,20 +348,6 @@ public class Zoologico {
         for (Funcionario funcionario : funcionarios) {
             if (funcionario instanceof Biologo) {
                 ((Biologo) funcionario).registrarInformacaoAnimal();
-            }
-        }
-    }
-
-    public void alimentarAnimaisPorNecessidadeAlimentar() {
-        if (animais.isEmpty()) {
-            System.out.println("Nenhum animal cadastrado.");
-        } else {
-            System.out.print("Digite a necessidade alimentar: ");
-            String necessidadeAlimentar = scanner.nextLine();
-            for (Animal animal : animais) {
-                if (animal.getNecessidadeAlimentar().equalsIgnoreCase(necessidadeAlimentar)) {
-                    animal.comer();
-                }
             }
         }
     }
