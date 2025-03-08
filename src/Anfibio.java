@@ -1,7 +1,7 @@
 public class Anfibio extends Animal {
 
-    public Anfibio(int idade, String nome, int peso, String necessidadeAlimentar) {
-        super(idade, "Anfíbio", new Setor("Setor de Anfíbios\n"), nome, peso, necessidadeAlimentar);
+    public Anfibio(int idade, String nome, int peso, String necessidadeAlimentar, Setor setor) {
+        super(idade, "Anfíbio", setor, nome, peso, necessidadeAlimentar);
     }
 
     @Override

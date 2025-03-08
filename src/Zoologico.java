@@ -16,9 +16,9 @@ public class Zoologico {
     public void exibirMenu() {
         int opcao;
 
-        System.out.print("\t------------------------\n");
-        System.out.print("\t    ZOOLÓGICO UBERZOO\n");
-        System.out.print("\t------------------------\n");
+        System.out.print("\t-------------------------\n");
+        System.out.print("\t     ZOOLÓGICO UBERZOO\n");
+        System.out.print("\t-------------------------\n");
         System.out.print("\tSistema de Gerenciamento\n");
 
         System.out.print("\n\t    w  c(..)o     \n");
@@ -33,7 +33,7 @@ public class Zoologico {
             System.out.println("\n######## ZOO ########");
             System.out.println("1. Cadastrar Animal 🐾");
             System.out.println("2. Cadastrar Funcionário 👨");
-            System.out.println("3. Listar Animais por Setores 📋");
+            System.out.println("3. Listar Animais por Setores 🐊");
             System.out.println("4. Listar Comportamentos dos Animais 🦁");
             System.out.println("5. Listar Funcionários por Função 👩‍🔬");
             System.out.println("6. Listar Atividades dos Funcionários 🛠️");
@@ -49,8 +49,8 @@ public class Zoologico {
                 case 4 -> listarComportamentosDosAnimais();
                 case 5 -> listarFuncionariosPorFuncao();
                 case 6 -> listarAtividadesFuncionarios();
-                case 7 -> System.err.println("Encerrando o sistema...");
-                default -> System.err.println("Digite uma opção válida.\n");
+                case 7 -> System.err.println("\nEncerrando o sistema... 👋");
+                default -> System.err.println("Digite uma opção válida. ⚠️\n");
             }
         } while (opcao != 7);
     }
@@ -87,18 +87,38 @@ public class Zoologico {
         int classeOpcao = scanner.nextInt();
         scanner.nextLine();
 
+        System.out.println("\nSelecione o setor que o animal será alocado:");
+        System.out.println("1. Setor de Mamíferos | 2. Setor de Aves | 3. Setor de Répteis | 4. Setor de Animais Aquáticos | 5. Setor de Anfíbios");
+        System.out.print("Escolha uma opção: ");
+        int setorOpcao = scanner.nextInt();
+        scanner.nextLine();
+
+        Setor setor;
+        switch (setorOpcao) {
+            case 1 -> setor = new SetorMamiferos();
+            case 2 -> setor = new SetorAves();
+            case 3 -> setor = new SetorRepteis();
+            case 4 -> setor = new SetorAnimaisAquaticos();
+            case 5 -> setor = new SetorAnfibios();
+            default -> {
+                System.out.println("Opção inválida. Setor não encontrado. Animal não cadastrado.");
+                return;
+            }
+        }
+
         Animal animal;
         switch (classeOpcao) {
-            case 1 -> animal = new Mamifero(idade, nome, peso, necessidadeAlimentar);
-            case 2 -> animal = new Ave(idade, nome, peso, necessidadeAlimentar);
-            case 3 -> animal = new Reptil(idade, nome, peso, necessidadeAlimentar);
-            case 4 -> animal = new Anfibio(idade, nome, peso, necessidadeAlimentar);
+            case 1 -> animal = new Mamifero(idade, nome, peso, necessidadeAlimentar, setor);
+            case 2 -> animal = new Ave(idade, nome, peso, necessidadeAlimentar, setor);
+            case 3 -> animal = new Reptil(idade, nome, peso, necessidadeAlimentar, setor);
+            case 4 -> animal = new Anfibio(idade, nome, peso, necessidadeAlimentar, setor);
             default -> {
                 System.out.println("Opção inválida. Classe biológica não encontrada. Animal não cadastrado.");
                 return;
             }
         }
 
+        animal.setSetor(setor);
         animais.add(animal);
         System.out.println("Animal cadastrado com sucesso!");
     }

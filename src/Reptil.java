@@ -1,11 +1,11 @@
 public class Reptil extends Animal {
 
-    public Reptil(int idade, String nome, int peso, String necessidadeAlimentar) {
-        super(idade, "Réptil", new Setor("Setor de Répteis\n"), nome, peso, necessidadeAlimentar);
+    public Reptil(int idade, String nome, int peso, String necessidadeAlimentar, Setor setor) {
+        super(idade, "Réptil", setor, nome, peso, necessidadeAlimentar);
     }
 
     @Override
-    public void comer(){
+    public void comer() {
         System.out.println(getNome() + " está comendo");
     }
 
@@ -20,7 +20,7 @@ public class Reptil extends Animal {
     }
 
     @Override
-    public void descansar(){
+    public void descansar() {
         System.out.println(getNome() + " está descansando.");
     }
 

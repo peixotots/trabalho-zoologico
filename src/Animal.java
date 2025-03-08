@@ -10,7 +10,7 @@ public class Animal {
     public Animal(int idade, String classeBiologica, Setor setor, String nome, int peso, String necessidadeAlimentar) {
         this.idade = idade;
         this.classeBiologica = classeBiologica;
-        this.setor = alocarSetor(classeBiologica);
+        this.setor = setor;
         this.nome = nome;
         this.peso = peso;
         this.necessidadeAlimentar = necessidadeAlimentar;
@@ -64,21 +64,6 @@ public class Animal {
         this.necessidadeAlimentar = necessidadeAlimentar;
     }
 
-    private Setor alocarSetor(String classeBiologica) {
-        switch (classeBiologica) {
-            case "Mamífero":
-                return new Setor("Setor de Mamíferos");
-            case "Ave":
-                return new Setor("Setor de Animais Aquáticos");
-            case "Réptil":
-                return new Setor("Setor de Répteis");
-            case "Anfíbio":
-                return new Setor("Setor de Anfíbios");
-            default:
-                throw new IllegalArgumentException("Classe biológica desconhecida: " + classeBiologica);
-        }
-    }
-
     public void comer() {
         System.out.println(nome + " está comendo.");
     }
@@ -91,7 +76,7 @@ public class Animal {
         System.out.println(nome + " está brincando.");
     }
 
-    public void descansar(){
+    public void descansar() {
         System.out.println(nome + "está descansando.");
     }
 

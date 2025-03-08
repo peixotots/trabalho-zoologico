@@ -1,11 +1,11 @@
 public class Ave extends Animal {
 
-    public Ave(int idade, String nome, int peso, String necessidadeAlimentar) {
-        super(idade, "Ave", new Setor("Setor de Aves\n"), nome, peso, necessidadeAlimentar);
+    public Ave(int idade, String nome, int peso, String necessidadeAlimentar, Setor setor) {
+        super(idade, "Ave", setor, nome, peso, necessidadeAlimentar);
     }
 
     @Override
-    public void comer(){
+    public void comer() {
         System.out.println(getNome() + " está comendo");
     }
 
@@ -20,7 +20,7 @@ public class Ave extends Animal {
     }
 
     @Override
-    public void descansar(){
+    public void descansar() {
         System.out.println(getNome() + " está descansando.");
     }
 
